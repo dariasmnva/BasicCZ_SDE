@@ -1,37 +1,40 @@
 ﻿// В Указанном массиве вещественных чисел 
 //найдите разницу между максимальным и минимальным элементом
 
-int N=10;
-int [] a= new int[N];
-Random random = new Random();
-for(int i=0;i<a.Length; i++)
-    a[i]=random.Next(10,99);
 
-int Max =a[0],MaxIndex=0;
-for (int i = 0; i < a.Length; i++)
+using System;
+double[] a;
+InitDoubles(out a,2);
+double min,max;
+FindMinMax(a,out min,out max);
+Print(a);
+System.Console.WriteLine();
+System.Console.WriteLine(max-min);
+
+
+
+void InitDoubles(out double[] a,int Length=10,int min=0,int max=100)
 {
-	if (Max < a[i])
-	{
-		Max = a[i];
-		MaxIndex = i;
-	}
+    a=new double[Length];
+    Random random=new Random();//псевдослучайные числа
+    for(int i=0;i<a.Length;i++)
+            a[i]=random.Next(min,max+1)/1000.0;
 }
 
-int Min = a[0],MinIndex=0;
-for (int i = 0; i < a.Length; i++)
+void FindMinMax(double[] a,out double min, out double max)
 {
-	if (Min > a[i])
-	{
-		Min = a[i];
-		MinIndex = i;
-	}
+    min=a[0];
+    max=a[0];
+    for(int i=1;i<a.Length;i++)
+    {
+        if (a[i]>max) max=a[i];
+        if (a[i]<min) min=a[i];
+    }
 }
-int r=Max-Min;
 
- for(int i=0; i<a.Length;i++)   
-     Console.Write($"{a[i],4}");   
-Console.WriteLine();  
-Console.WriteLine($"Максимальное значение={Max}");   
-Console.WriteLine($"Минимальное значение={Min}");   
-Console.WriteLine($"Разница между максимальным и минимальным значением:{Max}-{Min}={r}");   
- 
+
+void Print(double[] a)
+{
+    for(int i=0;i<a.Length;i++)
+        System.Console.Write($"{a[i],6:F3} ");
+}
