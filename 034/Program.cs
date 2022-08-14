@@ -2,33 +2,45 @@
 // Найти сумму положительных/отрицательных элементов массива
 
 
-int N=12;
-int [] a= new int[N];
-Random random = new Random();
-for(int i=0;i<a.Length; i++)
-    a[i]=random.Next(-9,10);
+int N=3;
+int[] a;
+Init(out a,12,-9,9);
+int sumNegativ,sumPositive;
+Solve(a,out sumPositive,out sumNegativ);
+Print (a);
+ Console.WriteLine($"\nСумма положительных:{sumPositive}");    
+Console.WriteLine($"Сумма отрицательных:{sumNegativ}");
 
-int sumPositive=0;
-for (int i=0; i<a.Length; i++)
+void Init(out int [] a,int Lenght=10, int min=0,int max=10)
 {
-    if(a[i]>0)
+    a=new int[Lenght];
+    Random random = new Random();
+    for(int i=0;i<a.Length; i++)
+    a[i]=random.Next(min,max+1);
+}    
+
+
+void Solve(int[] a, out int sumPositive, out int sumNegativ)
+{
+    sumPositive =0;
+    sumNegativ =0;
+    for(int i=0; i<a.Length;i++)
     {
-        sumPositive=sumPositive+a[i];
+        if (a[i]>0)
+        {
+            sumPositive=sumPositive+a[i];
+        }
+        if (a[i]<0)
+        {
+            sumNegativ+=a[i];
+        }
     }
 }
 
-int sumNegativ=0;
-for (int i=0; i<a.Length; i++)
+
+
+void Print(int[] a)
 {
-    if(a[i]<0)
-    {
-        sumNegativ+=a[i];
-    }
-}
-
-
-for (int i=0; i<a.Length; i++)
+    for (int i=0; i<a.Length; i++)
     Console.Write($"{a[i],4}");
-//Console.WriteLine();
-Console.WriteLine($"\nСумма положительных:{sumPositive}");    
-Console.WriteLine($"Сумма отрицательных:{sumNegativ}");    
+}
